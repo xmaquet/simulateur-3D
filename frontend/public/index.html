@@ -3,50 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Object Viewer</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <title>Simulateur de Mug 3D</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-  <h1>Visualisation 3D</h1>
-  <div id="container" style="width: 100%; height: 100vh;"></div>
-  <script>
-    // Initialisation de la scène
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('container').appendChild(renderer.domElement);
-
-    // Lumière
-    const light = new THREE.AmbientLight(0x404040, 2); // Lumière ambiante douce
-    scene.add(light);
-
-    // Charger le modèle GLB
-    const loader = new THREE.GLTFLoader();
-    loader.load(
-      'http://192.168.0.101:5000/static/models/mug.glb',
-      function (gltf) {
-        const model = gltf.scene;
-        scene.add(model);
-        model.position.set(0, 0, 0);
-        camera.position.set(0, 1, 3);
-        camera.lookAt(0, 0, 0);
-      },
-      function (xhr) {
-        console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
-      },
-      function (error) {
-        console.error('An error occurred:', error);
-      }
-    );
-
-    // Animation
-    function animate() {
-      requestAnimationFrame(animate);
-      renderer.render(scene, camera);
-    }
-    animate();
-  </script>
+  <!-- Conteneur principal pour React -->
+  <div id="root"></div>
 </body>
 </html>
