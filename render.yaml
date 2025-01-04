@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: simulateur-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    buildCommand: ""
+    startCommand: "node server.js"
+    envVars:
+      - key: PORT
+        value: 5000
+
+  - type: web
+    name: simulateur-frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
