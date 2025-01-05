@@ -1,17 +1,22 @@
 services:
   - type: web
-    name: simulateur-backend
-    env: docker
+    name: backend
+    env: node
     dockerfilePath: ./backend/Dockerfile
-    buildCommand: ""
     startCommand: "node server.js"
     envVars:
-      - key: PORT
-        value: 5000
+      - key: NODE_ENV
+        value: production
+    plan: starter
+    healthCheckPath: "/health"
 
   - type: web
-    name: simulateur-frontend
-    env: docker
+    name: frontend
+    env: static
     dockerfilePath: ./frontend/Dockerfile
-    buildCommand: "npm install && npm run build"
-    startCommand: "npm start"
+    buildCommand: "npm run build"
+    startCommand: "serve -s build -l 80"
+    envVars:
+      - key: REACT_APP_API_URL
+        value: "https://<backend-service-name>.onrender.com"
+    plan: starter

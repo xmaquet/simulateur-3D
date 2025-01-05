@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: frontend
-    env: docker
-    dockerfilePath: ./frontend/Dockerfile
-    buildCommand: "npm install && npm run build"
-    startCommand: "npm start"
