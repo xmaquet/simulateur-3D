@@ -9,8 +9,15 @@ const cors = require('cors');
 app.use(cors());
 
 app.use(express.json());
-app.use(express.static('public'));
-app.use('/static', express.static('public'));
+//app.use(express.static('public'));
+//app.use('/static', express.static('public'));
+// Servir les fichiers statiques depuis le dossier public/static
+app.use('/static', express.static(path.join(__dirname, 'public/static')));
+
+// Route de test
+app.get('/', (req, res) => {
+  res.send('Backend is running. Static files are served at /static.');
+});
 
 
 // Endpoint de test

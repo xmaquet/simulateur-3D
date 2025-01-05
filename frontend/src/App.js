@@ -1,14 +1,16 @@
-import React from 'react';
+import React from "react";
+import ObjectViewer from "./components/ObjectViewer";
 
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <h1>Simulateur 3D</h1>
-                <p>Bienvenue dans l'interface de personnalisation 3D.</p>
-            </header>
-        </div>
-    );
-}
+const App = () => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const modelType = queryParams.get("model") || "mug";
+
+  return (
+    <div className="App">
+      <h1>Simulateur de {modelType === "mug" ? "Mug" : "Tumbler"}</h1>
+      <ObjectViewer modelType={modelType} />
+    </div>
+  );
+};
 
 export default App;
