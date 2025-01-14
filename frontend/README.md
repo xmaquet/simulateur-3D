@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Frontend - Simulateur 3D
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Le frontend du projet Simulateur 3D est une application React qui permet aux utilisateurs de personnaliser des modèles 3D, comme des mugs, en téléchargeant des images et en visualisant directement le rendu sur l'objet.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **Structure du Frontend**
 
-### `npm start`
+### **1. Répertoire Principal : `/frontend`**
+Ce répertoire contient les fichiers nécessaires pour le développement et le déploiement du frontend.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **`public/`** :
+  - Contient les fichiers statiques accessibles directement.
+  - **`index.html`** : Page HTML principale utilisée comme conteneur pour l'application React.
+  - **`static/models/`** : Répertoire où sont stockés les fichiers `.glb` (modèles 3D).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **`src/`** :
+  - Contient le code source principal de l'application React.
+  - **`components/`** : Composants réutilisables, y compris `ObjectViewer.js` pour le rendu 3D.
+  - **`App.js`** : Point d'entrée principal de l'application React.
+  - **`index.js`** : Initialise l'application et monte le composant React dans le DOM.
 
-### `npm test`
+- **Fichiers de configuration** :
+  - **`package.json`** : Contient les dépendances et scripts du projet.
+  - **`Dockerfile`** : Déploie le frontend en production via un serveur Nginx.
+  - **`nginx.conf`** : Configure Nginx pour servir les fichiers statiques et rediriger les routes React.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## **Installation et Lancement**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **1. Installation**
+Assurez-vous d’avoir Node.js installé sur votre machine.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+cd frontend
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **2. Lancement en Développement**
+Lancez le serveur de développement React :
 
-### `npm run eject`
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Par défaut, l'application sera accessible à `http://localhost:3000`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **3. Construction pour la Production**
+Construisez les fichiers statiques pour le déploiement :
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run build
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Les fichiers générés seront placés dans le répertoire `build/`.
 
-## Learn More
+### **4. Servir les Fichiers en Production**
+Utilisez `serve` ou Nginx pour afficher les fichiers construits :
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npx serve -s build
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## **Variables d'Environnement**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Le frontend utilise une variable d’environnement pour communiquer avec le backend :
 
-### Analyzing the Bundle Size
+- **`REACT_APP_API_URL`** : URL de l'API backend (par exemple, `https://backend-service-name.onrender.com`).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Ajoutez cette variable dans Render ou dans un fichier `.env` local pour les tests :
 
-### Making a Progressive Web App
+```env
+REACT_APP_API_URL=http://localhost:5000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## **Structure des Répertoires**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+frontend/
+├── public/
+│   ├── static/
+│   │   └── models/
+│   │       └── mug.glb
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   └── ObjectViewer.js
+│   ├── App.js
+│   ├── index.js
+│   └── ...
+├── package.json
+├── Dockerfile
+├── nginx.conf
+└── README.md
+```
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
